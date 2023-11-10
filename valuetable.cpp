@@ -2,6 +2,7 @@
 #include "modbusmanager.h"
 #include "valuemodel.h"
 #include "value.h"
+#include "database.h"
 
 #include <QDateTime>
 #include <QHeaderView>
@@ -23,5 +24,6 @@ void ValueTable::onRequestFinished(const QPointer<ModbusClient> modbus, int valu
     newVal.setAddress(valueAddress);
     newVal.setValue(value);
 
+    database().addValue(modbus->name(), newVal);
     model_->addValue(newVal);
 }

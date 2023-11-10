@@ -19,7 +19,7 @@ DeviceList::DeviceList(QWidget *parent)
 
 void DeviceList::addDevice(const Device &device)
 {
-    model_->addDevice(device);
+//    model_->addDevice(device);
     modbusManager().addModbus(device.name(), device.address(), device.port());
 }
 

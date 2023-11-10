@@ -3,11 +3,11 @@
 
 #include <QDialog>
 
-class QLabel;
-class QLineEdit;
+class BuddyLineEdit;
 class QPushButton;
 
 class Device;
+class Value;
 
 class DeviceAddWindow : public QDialog
 {
@@ -16,7 +16,7 @@ public:
     explicit DeviceAddWindow(QWidget *parent = nullptr);
 
 signals:
-    void deviceAdded(const Device &device);
+    void deviceAdded(const Device &device, const Value &value);
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -30,12 +30,11 @@ private slots:
     void onAddClicked();
 
 private:
-    QLineEdit *nameEdit_ = nullptr;
-    QLabel *nameLabel_ = nullptr;
-    QLineEdit *ipEdit_ = nullptr;
-    QLabel *ipLabel_ = nullptr;
-    QLineEdit *portEdit_ = nullptr;
-    QLabel *portLabel_ = nullptr;
+    BuddyLineEdit *nameEdit_ = nullptr;
+    BuddyLineEdit *ipEdit_ = nullptr;
+    BuddyLineEdit *portEdit_ = nullptr;
+    BuddyLineEdit *valueAddressEdit_ = nullptr;
+
     QPushButton *addButton_ = nullptr;
 };
 
