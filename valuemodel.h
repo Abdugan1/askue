@@ -13,6 +13,7 @@ public:
     explicit ValueModel(QObject *parent = nullptr);
 
     void addValue(const Value &value);
+    void select(const QString &name);
 
     int rowCount(const QModelIndex &parent) const override;
     int columnCount(const QModelIndex &parent) const override;
@@ -20,7 +21,10 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
+    QString currentName() const;
+
 private:
+    QString currentName_;
     QVector<Value> values_;
 };
 

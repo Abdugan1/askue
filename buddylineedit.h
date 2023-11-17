@@ -11,9 +11,11 @@ class BuddyLineEdit : public QWidget
 {
     Q_OBJECT
 public:
-    explicit BuddyLineEdit(const QString &lineEditText,
-                           const QString &buddyLabelText,
+    explicit BuddyLineEdit(const QString &buddyLabelText,
+                           const QString &placeholder,
                            QWidget *parent = nullptr);
+
+    void setText(const QString &text);
 
     void setPlaceholderText(const QString &placeholder);
 

@@ -7,6 +7,8 @@
 class QModbusClient;
 class QModbusReply;
 
+class Device;
+
 class ModbusClient : public QObject
 {
     Q_OBJECT
@@ -16,6 +18,7 @@ public:
         Rtu
     };
 
+    explicit ModbusClient(const Device &device);
     explicit ModbusClient(const QString &name, const QString &address, int port = 502);
 
     bool connectDevice();
@@ -35,6 +38,9 @@ signals:
 private slots:
     void onStateChanged();
     void onReadFinished();
+
+private:
+    void init(const QString &name, const QString &address, int port);
 
 private:
     QString name_;

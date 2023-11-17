@@ -9,16 +9,19 @@
 #include "modbusclient.h"
 #include "modbusintervalrequester.h"
 
+class Device;
+class Value;
+
 class ModbusManager : public QObject
 {
     Q_OBJECT
 public:
     static ModbusManager &instance();
 
-    void addModbus(const QString &name, const QString &address, int port = 502, int requestInterval = 2 * 1000);
+    void addModbus(const Device &device, const Value &toRequest, int requestInterval = 2 * 1000);
 
 signals:
-    void readFinished(const QPointer<ModbusClient> modbus, int valueAddress, int value);
+    void readFinished(const QPointer<ModbusClient> modbus, const Value &value);
 
 private slots:
     void onRequestResult(int value);

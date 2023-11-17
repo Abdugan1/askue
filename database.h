@@ -5,8 +5,16 @@
 #include <QString>
 #include <QDateTime>
 #include <QSqlDatabase>
+#include <QSqlQuery>
 
+class Device;
 class Value;
+
+class SqlQuery : public QSqlQuery
+{
+public:
+    explicit SqlQuery(const QString &query = "");
+};
 
 class Database : public QObject
 {
@@ -14,16 +22,22 @@ class Database : public QObject
 public:
     static Database &instance();
 
+    QList<Value> values(const QString &name);
+
 public slots:
-    void addValue(const QString &name, const Value &value);
+    void addDevice(const Device &device);
+    void addValue(const Device &device, const Value &value);
 
 private:
     explicit Database();
+    void createDatabase(const QString &name);
 
     void createTables();
 
 private:
     QSqlDatabase database_;
+
+    friend class SqlQuery;
 };
 
 inline Database &database()

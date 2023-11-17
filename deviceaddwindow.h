@@ -16,7 +16,7 @@ public:
     explicit DeviceAddWindow(QWidget *parent = nullptr);
 
 signals:
-    void deviceAdded(const Device &device, const Value &value);
+    void deviceAdded(const Device &device);
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -33,7 +33,6 @@ private:
     BuddyLineEdit *nameEdit_ = nullptr;
     BuddyLineEdit *ipEdit_ = nullptr;
     BuddyLineEdit *portEdit_ = nullptr;
-    BuddyLineEdit *valueAddressEdit_ = nullptr;
 
     QPushButton *addButton_ = nullptr;
 };

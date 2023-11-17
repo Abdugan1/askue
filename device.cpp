@@ -5,6 +5,11 @@ Device::Device()
 
 }
 
+QString Device::id() const
+{
+    return ip_ + ":" + QString::number(port_);
+}
+
 QString Device::name() const
 {
     return name_;
@@ -15,14 +20,14 @@ void Device::setName(const QString &newName)
     name_ = newName;
 }
 
-QString Device::address() const
+QString Device::ip() const
 {
-    return address_;
+    return ip_;
 }
 
-void Device::setAddress(const QString &newAddress)
+void Device::setIp(const QString &newAddress)
 {
-    address_ = newAddress;
+    ip_ = newAddress;
 }
 
 int Device::port() const

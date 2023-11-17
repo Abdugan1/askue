@@ -8,18 +8,20 @@ class Device
 public:
     explicit Device();
 
+    QString id() const;
+
     QString name() const;
     void setName(const QString &newName);
 
-    QString address() const;
-    void setAddress(const QString &newAddress);
+    QString ip() const;
+    void setIp(const QString &newAddress);
 
     int port() const;
     void setPort(int newPort);
 
 private:
     QString name_;
-    QString address_;
+    QString ip_;
     int port_ = 502;
 };
 

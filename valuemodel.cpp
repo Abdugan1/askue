@@ -1,4 +1,5 @@
 #include "valuemodel.h"
+#include "database.h"
 
 ValueModel::ValueModel(QObject *parent)
     : QAbstractTableModel(parent)
@@ -12,6 +13,18 @@ void ValueModel::addValue(const Value &value)
     beginInsertRows(QModelIndex(), row, row);
     values_.push_back(value);
     endInsertRows();
+}
+
+void ValueModel::select(const QString &name)
+{
+    currentName_ = name;
+
+    const int prevSize = values_.size();
+
+    beginResetModel();
+    values_ = database().values(name);
+    qDebug() << rowCount(QModelIndex());
+    endResetModel();
 }
 
 int ValueModel::rowCount(const QModelIndex &parent) const
@@ -79,4 +92,9 @@ QVariant ValueModel::data(const QModelIndex &index, int role) const
 Qt::ItemFlags ValueModel::flags(const QModelIndex &index) const
 {
     return QAbstractItemModel::flags(index);
+}
+
+QString ValueModel::currentName() const
+{
+    return currentName_;
 }

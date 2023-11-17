@@ -1,11 +1,12 @@
 #include "modbusmanager.h"
+#include "database.h"
+#include "value.h"
 
 #include <QTimer>
 #include <QDebug>
 
 ModbusManager::ModbusManager()
 {
-
 }
 
 ModbusManager &ModbusManager::instance()
@@ -14,13 +15,13 @@ ModbusManager &ModbusManager::instance()
     return self;
 }
 
-void ModbusManager::addModbus(const QString &name, const QString &address, int port, int requestInterval)
+void ModbusManager::addModbus(const Device &device, const Value &toRequest, int requestInterval)
 {
-    QPointer<ModbusClient> modbus(new ModbusClient(name, address, port));
+    QPointer<ModbusClient> modbus(new ModbusClient(device));
 
     QPointer<ModbusIntervalRequester> requester(new ModbusIntervalRequester(modbus));
     requester->setRequestIntervalMs(requestInterval);
-    requester->setValueAddress(13312);
+    requester->setValueAddress(toRequest.address());
 
     modbusIntervalRequesters_.push_back(requester);
 
@@ -48,5 +49,10 @@ void ModbusManager::onRequestResult(int value)
 
     qDebug() << deviceIp << valueAddress << value;
 
-    emit readFinished(modbus, valueAddress, value);
+    Value val;
+    val.setAddress(valueAddress);
+    val.setValue(value);
+    val.setDateTime(QDateTime::currentDateTime());
+
+    emit readFinished(modbus, val);
 }

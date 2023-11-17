@@ -3,9 +3,11 @@
 
 #include <QMainWindow>
 
-class DeviceList;
+class DeviceView;
+class ValueView;
+
 class DeviceAddWindow;
-class ValueTable;
+class ValueAddWindow;
 
 class MainWindow : public QMainWindow
 {
@@ -19,8 +21,7 @@ private:
     void setupUi();
 
 private:
-    DeviceList *deviceList_ = nullptr;
-    ValueTable *valueTable_ = nullptr;
-    DeviceAddWindow *deviceAddWindow_ = nullptr;
+    DeviceView *deviceList_ = nullptr;
+    ValueView *valueTable_ = nullptr;
 };
 #endif // MAINWINDOW_H

@@ -23,17 +23,24 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         modbusclient.h modbusclient.cpp
-        devicelist.h devicelist.cpp
+        deviceview.h deviceview.cpp
         devicemodel.h devicemodel.cpp
         deviceaddwindow.h deviceaddwindow.cpp
         device.h device.cpp
         modbusmanager.h modbusmanager.cpp
-        valuetable.h valuetable.cpp
+        valueview.h valueview.cpp
         modbusintervalrequester.h modbusintervalrequester.cpp
         valuemodel.h valuemodel.cpp
         value.h value.cpp
         database.h database.cpp
         buddylineedit.h buddylineedit.cpp
+        devicecontextmenu.h devicecontextmenu.cpp
+        valueaddwindow.h valueaddwindow.cpp
+        valuerequestoptions.h valuerequestoptions.cpp
+        devicedelegate.h devicedelegate.cpp
+        treeitem.h treeitem.cpp
+        deviceitem.h deviceitem.cpp
+        valueitem.h valueitem.cpp
 
     )
 # Define target properties for Android with Qt 6 as:

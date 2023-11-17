@@ -1,7 +1,6 @@
 #include "mainwindow.h"
-#include "devicelist.h"
-#include "deviceaddwindow.h"
-#include "valuetable.h"
+#include "deviceview.h"
+#include "valueview.h"
 
 #include <QBoxLayout>
 
@@ -10,10 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setupUi();
 
-    deviceAddWindow_ = new DeviceAddWindow;
-
-    connect(deviceList_, &DeviceList::addDeviceButtonClicked, deviceAddWindow_, &DeviceAddWindow::show);
-    connect(deviceAddWindow_, &DeviceAddWindow::deviceAdded, deviceList_, &DeviceList::addDevice);
+    connect(deviceList_, &DeviceView::currentChanged, valueTable_, &ValueView::selectCurrent);
 }
 
 MainWindow::~MainWindow()
@@ -22,8 +18,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupUi()
 {
-    deviceList_ = new DeviceList;
-    valueTable_ = new ValueTable;
+    deviceList_ = new DeviceView;
+    valueTable_ = new ValueView;
 
     auto layout = new QHBoxLayout;
     layout->addWidget(deviceList_);
